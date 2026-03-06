@@ -1,76 +1,72 @@
 # Quiz CLI
 
-Interactive command-line quiz game for learning programming topics (JavaScript, Node.js, and general programming).
+An interactive command-line quiz game for learning JavaScript and general programming concepts.
 
-## About
+This repository contains a small Node.js CLI application that presents multiple-choice questions grouped by category and tracks your score.
 
-This repository contains a small, dependency-free CLI quiz application implemented with modern Node.js features (ES modules, async/await). The app is driven by a JSON file of question categories and provides an interactive experience in the terminal: choose a category, select the number of questions, answer prompts, and review results.
+## Project overview
+
+- Entry point: `index.js` (ES module)
+- Core modules: `src/quiz.js`, `src/input.js`, `src/colors.js`
+- Questions data: `data/questions.json`
+- Package manifest: `package.json`
 
 ## Requirements
 
-- Node.js >= 18.0.0 (see package.json "engines")
-- No external dependencies — uses only built-in Node.js modules
+- Node.js >= 18.0.0 (the package.json specifies `engines.node: ">=18.0.0"`).
 
-## Installation
+## Install
 
-1. Clone the repository and switch to the project directory.
-2. Install Node.js (if not installed) matching the required version.
+Clone the repository and (optionally) install dependencies:
 
-Optional: initialize a local package install if you plan to extend the project, but no npm packages are required to run.
+```bash
+git clone <repo-url>
+cd test-app
+npm install
+```
 
-## Usage
+Note: The project uses only built-in Node.js modules in the source; there may be no external dependencies.
 
-From the project root (run in the `docs` branch or `main` branch):
+## Run
 
-- Start the CLI using npm:
+Start the CLI using the npm script or directly with Node:
 
-  npm start
+```bash
+npm start
+# or
+node index.js
+```
 
-- Or run directly with Node:
+When the program runs it will:
+- Show a category selection menu (JavaScript Basics, Node.js Fundamentals, General Programming)
+- Let you choose how many questions to answer
+- Present multiple-choice questions and record your answers
+- Show a final score and review incorrect answers
 
-  node index.js
+Controls are text-based: select options by entering the number shown, and answer yes/no prompts with `y` or `n`.
 
-The CLI will prompt you to select a category and how many questions to answer. Follow the on-screen prompts to play.
+## Project structure
 
-There is also a test script defined in package.json (runs Node's built-in test runner):
+Files and folders in the repository's main branch:
 
-  npm test
-
-## Features
-
-- Multiple categories (configured in data/questions.json)
-- Choose number of questions (All / 3 / 5 where available)
-- Progress bar and per-question feedback
-- Final score summary with review of incorrect answers
-- Colorized terminal output using ANSI escape codes (src/colors.js)
-
-## Project Structure
-
-- index.js - Entry point and main application loop
-- package.json - Project metadata, scripts, and engine requirements
-- data/questions.json - Question categories and items used by the quiz
+- index.js — application entry point (loads questions, runs interactive loop)
+- package.json — project manifest (name: `quiz-cli`, node engine requirement, scripts)
+- data/questions.json — question categories and question objects (question, options, answer index, explanation)
 - src/
-  - input.js - Prompting and input utilities
-  - quiz.js - Quiz class and game logic
-  - colors.js - Lightweight terminal color helpers
+  - colors.js — small utility to format colored terminal output using ANSI codes
+  - input.js — readline-based helpers for prompting, selecting, and confirming
+  - quiz.js — Quiz class implementing game logic, progress, scoring, and results
 
-## Adding or Editing Questions
+## Contributing
 
-Questions are stored in data/questions.json. The top-level "categories" object maps category IDs to category objects with a "name" and a "questions" array. Each question object contains:
+Contributions are welcome. Suggested improvements include adding more questions, new categories, or improving the user interface.
 
-- question: string
-- options: array of strings
-- answer: index (number) of the correct option (0-based)
-- explanation: optional string shown after answering
-
-Edit or add categories/questions directly in data/questions.json and run the CLI to use them.
-
-## Development notes
-
-- The project uses ES modules ("type": "module" in package.json).
-- The code relies only on built-in Node.js modules (fs, readline, path, url).
-- Entry point reads data/questions.json relative to index.js using import.meta.url.
+If you make changes, run the app locally to verify behavior and consider opening a pull request describing your changes.
 
 ## License
 
-This project is licensed under the MIT License (see package.json).
+MIT (as indicated in package.json)
+
+---
+
+(Generated README for the repository.)
